@@ -22,6 +22,7 @@ class CreateListingsTable extends Migration
             $table->string('email');
             $table->string('website');
             $table->longText('description');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

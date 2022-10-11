@@ -1,12 +1,16 @@
-<h1>{{ $heading }}</h1>
+@extends('layout')
 
-@if (count($listings) == 0)
-    <p>No Listings Found!</p>
-@else
-    @foreach ($listings as $listing)
-        <a href="/listings/{{ $listing['id'] }}">
-            <h2>{{ $listing['title'] }}</h2>
-        </a>
-        <p>{{ $listing['description'] }}</p>
-    @endforeach
-@endif
+@section('content')
+    @include('partials._hero')
+    @include('partials._search')
+
+    <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
+        @unless(count($listings) == 0)
+            @foreach ($listings as $listing)
+                <x-listing-card :listing="$listing" />
+            @endforeach
+        @else
+            <p>No Listings Found!</p>
+        @endunless
+    </div>
+@endsection
