@@ -18,11 +18,13 @@ use App\Http\Controllers\ListingController;
 Route::get('/', [ListingController::class, 'index']);
 
 // Show Single Listing
-Route::get('/listings/{listing}', [ListingController::class, 'show']);
+Route::get('/listings/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
 
 // Show Form to Create New Listing
+Route::get('/listings/create', [ListingController::class, 'create']);
 
 // Store New Listing
+Route::post('/listings', [ListingController::class, 'store']);
 
 // Show Form to Edit Listing
 
