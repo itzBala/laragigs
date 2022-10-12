@@ -21,29 +21,31 @@ Route::get('/locale/{locale}', [LocalizationController::class, 'setLang']);
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
-// All Listings
-Route::get('/', [ListingController::class, 'index']);
+Route::controller(ListingController::class)->group(function () {
+    // All Listings
+    Route::get('/', 'index');
 
-// Single Listing
-Route::get('/listings/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
+    // Single Listing
+    Route::get('/listings/{listing}', 'show')->where('listing', '[0-9]+');
 
-// Form to Create New Listing
-Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
+    // Form to Create New Listing
+    Route::get('/listings/create', 'create')->middleware('auth');
 
-// Store New Listing
-Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
+    // Store New Listing
+    Route::post('/listings', 'store')->middleware('auth');
 
-// Form to Edit Listing
-Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
+    // Form to Edit Listing
+    Route::get('/listings/{listing}/edit', 'edit')->middleware('auth');
 
-// Update Listing
-Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
+    // Update Listing
+    Route::put('/listings/{listing}', 'update')->middleware('auth');
 
-// Delete Listing
-Route::delete('/listings/{listing}', [ListingController::class, 'delete'])->middleware('auth');
+    // Delete Listing
+    Route::delete('/listings/{listing}', 'delete')->middleware('auth');
 
-// Manage Listing
-Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
+    // Manage Listing
+    Route::get('/listings/manage', 'manage')->middleware('auth');
+});
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
