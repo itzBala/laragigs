@@ -22,36 +22,36 @@ Route::get('/', [ListingController::class, 'index']);
 Route::get('/listings/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
 
 // Form to Create New Listing
-Route::get('/listings/create', [ListingController::class, 'create']);
+Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 
 // Store New Listing
-Route::post('/listings', [ListingController::class, 'store']);
+Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 
 // Form to Edit Listing
-Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
 
 // Update Listing
-Route::put('/listings/{listing}', [ListingController::class, 'update']);
+Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
 
 // Delete Listing
-Route::delete('/listings/{listing}', [ListingController::class, 'delete']);
+Route::delete('/listings/{listing}', [ListingController::class, 'delete'])->middleware('auth');
 
 // Manage Listing
-Route::get('/listings/manage', [ListingController::class, 'manage']);
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 // Form to Create/Register User
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
 // Store New User
 Route::post('/users', [UserController::class, 'store']);
 
 // Form to User Login
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 // Login User
-Route::post('/authenticate', [UserController::class, 'authenticate']);
+Route::post('/authenticate', [UserController::class, 'authenticate'])->middleware('guest');
 
 // Log User Out
-Route::post('/logout', [UserController::class, 'logout']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
