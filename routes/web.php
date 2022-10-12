@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
 
 /*
@@ -17,16 +18,16 @@ use App\Http\Controllers\ListingController;
 // All Listings
 Route::get('/', [ListingController::class, 'index']);
 
-// Show Single Listing
+// Single Listing
 Route::get('/listings/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
 
-// Show Form to Create New Listing
+// Form to Create New Listing
 Route::get('/listings/create', [ListingController::class, 'create']);
 
 // Store New Listing
 Route::post('/listings', [ListingController::class, 'store']);
 
-// Show Form to Edit Listing
+// Form to Edit Listing
 Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
 
 // Update Listing
@@ -34,3 +35,23 @@ Route::put('/listings/{listing}', [ListingController::class, 'update']);
 
 // Delete Listing
 Route::delete('/listings/{listing}', [ListingController::class, 'delete']);
+
+// Manage Listing
+Route::get('/listings/manage', [ListingController::class, 'manage']);
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
+
+// Form to Create/Register User
+Route::get('/register', [UserController::class, 'create']);
+
+// Store New User
+Route::post('/users', [UserController::class, 'store']);
+
+// Form to User Login
+Route::get('/login', [UserController::class, 'login']);
+
+// Login User
+Route::post('/authenticate', [UserController::class, 'authenticate']);
+
+// Log User Out
+Route::post('/logout', [UserController::class, 'logout']);
