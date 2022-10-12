@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\LocalizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,11 @@ use App\Http\Controllers\ListingController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Set Locale
+Route::get('/locale/{locale}', [LocalizationController::class, 'setLang']);
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ //
 
 // All Listings
 Route::get('/', [ListingController::class, 'index']);
